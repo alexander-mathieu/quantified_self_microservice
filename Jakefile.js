@@ -10,7 +10,6 @@ task('seedDatabase', { async: true }, (foodString) => {
     })
     .then(foodData => {
       foodData.hits.forEach(recipe => {
-        console.log(recipe)
         let serializedRecipe = new recipeSerializer(recipe);
 
         let recipe = Recipe.build(serializedRecipe);
