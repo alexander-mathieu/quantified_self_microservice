@@ -7,7 +7,7 @@ var graphqlHTTP = require('express-graphql')
 
 var indexRouter = require('./routes/index');
 var schema = require('./graphql/schema');
-var { getRecipes } = require('./graphql/resolvers.js');
+var { getRecipes, getAverageCalorieCount, getRecipesByNumOfIngredients, getRecipesByPrepTime } = require('./graphql/resolvers.js');
 
 var app = express();
 
@@ -24,7 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 var root = {
-  recipes: getRecipes
+  recipes: getRecipes,
+  averageCalorieCount: getAverageCalorieCount,
+  numOfIngredients: getRecipesByNumOfIngredients,
+  preparationTime: getRecipesByPrepTime
 }
 
 app.use('/graphql', graphqlHTTP({
