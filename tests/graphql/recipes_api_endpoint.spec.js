@@ -101,4 +101,46 @@ describe('Recipe api endpoint', () => {
       expect(response.body.data.recipes[1].calorieCount).toBe(100)
     })
   })
+
+  test('User can fetch recipes ordered by number of ingredients', () => {
+    return request(app)
+    .get('/graphql?query={numOfIngredients{id,name,numberOfIngredients}}')
+    .then(response => {
+      expect(response.statusCode).toBe(200)
+      expect(response.body.data.numOfIngredients.length).toBe(4)
+      expect(Object.keys(response.body.data.numOfIngredients[0])).toContain('id')
+      expect(Object.keys(response.body.data.numOfIngredients[0])).toContain('name')
+      expect(Object.keys(response.body.data.numOfIngredients[0])).toContain('numberOfIngredients')
+      expect(response.body.data.numOfIngredients[0].numberOfIngredients).toBe(3)
+      expect(response.body.data.numOfIngredients[1].numberOfIngredients).toBe(3)
+      expect(response.body.data.numOfIngredients[2].numberOfIngredients).toBe(6)
+      expect(response.body.data.numOfIngredients[3].numberOfIngredients).toBe(8)
+    }) 
+  })
+
+  test('User can fetch recipes ordered by prep time', () => {
+    return request(app)
+    .get('/graphql?query={preparationTime{id,name,preparationTime}}')
+    .then(response => {
+      expect(response.statusCode).toBe(200)
+      expect(response.body.data.preparationTime.length).toBe(4)
+      expect(Object.keys(response.body.data.preparationTime[0])).toContain('id')
+      expect(Object.keys(response.body.data.preparationTime[0])).toContain('name')
+      expect(Object.keys(response.body.data.preparationTime[0])).toContain('preparationTime')
+      expect(response.body.data.preparationTime[0].preparationTime).toBe(10)
+      expect(response.body.data.preparationTime[1].preparationTime).toBe(10)
+      expect(response.body.data.preparationTime[2].preparationTime).toBe(16)
+      expect(response.body.data.preparationTime[3].preparationTime).toBe(16)
+    }) 
+  })
+
+  test('User can fetch average calories for a food type', () => {
+    return request(app)
+    .get('/graphql?query={averageCalorieCount(foodType:"beef"){average,foodType}}')
+    .then(response => {
+      expect(response.statusCode).toBe(200)
+      expect(response.body.data.averageCalorieCount[0].average).toBe(500)
+      expect(response.body.data.averageCalorieCount[0].foodType).toBe('beef')
+    })
+  })
 })
