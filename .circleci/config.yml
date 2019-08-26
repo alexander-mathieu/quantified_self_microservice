@@ -1,0 +1,47 @@
+# Javascript Node CircleCI 2.0 configuration file
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.5.0
+        enviroment:
+          PGHOST: localhost
+          PGUSER: quantified_self_microservice
+          NODE_ENV: test
+
+      - image: postgres:11.3
+        environment:
+          POSTGRES_USER: quantified_self_microservice
+          POSTGRES_DB: quantified_self_microservice_test
+          POSTGRES_PASSWORD: ''
+
+    working_directory: ~/quantified_self_microservice
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      # Install dependencies
+      - run: npm install
+
+      # Save dependencies to cache
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run: npx sequelize db:drop
+      - run: npx sequelize db:create
+      - run: npx sequelize db:migrate
+
+      # Run Jake task to seed database
+      - run: npx jake seedDatabase
+
+      # Run tests
+      - run: npm test
