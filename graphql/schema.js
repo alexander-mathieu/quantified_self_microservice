@@ -10,11 +10,19 @@ module.exports = buildSchema(`
     calorieCount: Int
     preparationTime: Int
   },
+  type averageCalorieCount {
+    foodType: String
+    average: Float
+  },
   type Query {
     recipes(foodType: String,
       numberOfIngredients: Int
       calorieCount: Int
       preparationTime: Int
       ): [Recipe] 
+
+    averageCalorieCount(foodType: String!): [averageCalorieCount]
+    numOfIngredients: [Recipe]
+    preparationTime: [Recipe]
   }
 `)
