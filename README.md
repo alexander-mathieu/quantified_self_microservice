@@ -1,4 +1,4 @@
-# Quantified Self
+# Quantified Self Micro-Service
 
 ## About
 
