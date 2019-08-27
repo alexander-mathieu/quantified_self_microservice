@@ -2,7 +2,7 @@ var { buildSchema } = require('graphql')
 
 module.exports = buildSchema(`
   type Recipe {
-    id: Int 
+    id: Int
     foodType: String
     name: String
     recipeUrl: String
@@ -19,10 +19,10 @@ module.exports = buildSchema(`
       numberOfIngredients: Int
       calorieCount: Int
       preparationTime: Int
-      ): [Recipe] 
+      ): [Recipe]
 
-    averageCalorieCount(foodType: String!): [averageCalorieCount]
     numOfIngredients: [Recipe]
     preparationTime: [Recipe]
+    averageCalorieCount(foodType: String!): [averageCalorieCount]
   }
 `)

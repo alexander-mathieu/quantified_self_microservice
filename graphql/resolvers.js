@@ -12,7 +12,7 @@ module.exports = {
   getAverageCalorieCount: (foodType) => {
     return Recipe.findAll({
       where: foodType,
-      attributes: ['Recipe.foodType',[Sequelize.fn('avg', Sequelize.col('calorieCount')),'average']],
+      attributes: ['Recipe.foodType',[Sequelize.fn('avg', Sequelize.col('calorieCount')), 'average']],
       group: ['Recipe.foodType'],
       raw: true
     })
