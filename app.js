@@ -32,8 +32,7 @@ var root = {
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
-  graphiql: true
+  rootValue: root
 }));
 
 // catch 404 and forward to error handler
