@@ -17,7 +17,6 @@ Returns a list of all recipes in the database. The list will include all attribu
 * calorieCount
 * preparationTime
 
-
 Example of expected output:
 ```
 {
