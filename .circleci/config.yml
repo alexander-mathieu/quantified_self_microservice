@@ -40,8 +40,5 @@ jobs:
       - run: npx sequelize db:create
       - run: npx sequelize db:migrate
 
-      # Run Jake task to seed database
-      - run: npx jake seedDatabase
-
       # Run tests
       - run: npm test
