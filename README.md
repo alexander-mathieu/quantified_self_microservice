@@ -2,6 +2,18 @@
 
 ## About
 
+Welcome to _Quantified Self Micro-Service_! This is a micro-service meant to accompany [_Quantified Self_](https://github.com/CosmicSpagetti/quantified_self/), a Turing School of Software & Design project completed by [Billy Urrutia](https://github.com/CosmicSpagetti/) and [Alexander Mathieu](https://github.com/alexander-mathieu/) during Module 4 of the backend engineering program.
+
+The deployed site's endpoints can be consumed at:
+
+https://calorie-coach-ms.herokuapp.com/
+
+## Learning Goals
+* Create an Express API given specified endpoints and response formats
+* Create a micro-service that interfaces with the Edamam API
+* Integrate both apps together to complete the Quantified Self experience
+* Implement a GraphQL endpoint
+
 ## Endpoints
 
 This service utilizes [GraphQL](https://graphql.org/). All queries are made to a single endpoint, `/graphql`.
